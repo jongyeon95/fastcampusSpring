@@ -1,0 +1,11 @@
+TDD
+Test Driven Development
+
+테스트 주도 개발 = 목표 주도 개발 = 사용자 중심 개발 = 인터페이스 주도 개발
+올바르게 작동하는 깔끔한 코드를 작성하는게 목표이다.
+
+Red -> Green -> Refactoring
+
+테스트 코드 만드는법
+1.클래스 생성
+2. 생성 후 오른쪽 버튼 클릭후 GO TO 에서 Test
