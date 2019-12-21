@@ -1,0 +1,1 @@
+@GetMapping은 HTTP GET 핸들러 메서드로 호출.

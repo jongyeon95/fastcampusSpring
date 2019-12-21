@@ -1,0 +1,1 @@
+@Controller와 @ResponseBody를 합쳐놓은 역할을 수행한다. 어노테이션을 사용하면 스프링은 반환값이 ResponseBody부분에 자동으로 바인딩된다.
