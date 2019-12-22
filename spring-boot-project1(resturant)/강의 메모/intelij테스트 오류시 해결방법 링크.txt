@@ -1,0 +1,1 @@
+https://stackoverflow.com/questions/55405441/intelij-2019-1-update-brakes-junit-tests

@@ -3,16 +3,15 @@ package kr.co.fastcampus.eatgo.domain;
 public class Resturant {
     private  final String name;
     private  final String address;
+    private  final Long id;
 
-    public  Resturant(String name){
+    public  Resturant(long l, String name, String address){
         this. name=name;
-        this. address="";
+        this. address=address;
+        this. id=l;
     }
 
-    public Resturant(String name, String address) {
-        this . name =name;
-        this.address=address;
-    }
+
 
     public String getName() {
         return name;
@@ -24,5 +23,9 @@ public class Resturant {
 
     public String getInformation() {
         return  name + " in "+address;
+    }
+
+    public Long getId() {
+        return  id;
     }
 }

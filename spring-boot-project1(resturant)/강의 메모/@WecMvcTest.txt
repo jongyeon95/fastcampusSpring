@@ -1,0 +1,2 @@
+HTTP를 별도로 구현하지 않아도 웹과 관련된 Bean을 등록해준다.
+MockMvc를 다른 설정없이 @Autowired로 사용 할 수 있다.
