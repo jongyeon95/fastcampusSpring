@@ -28,4 +28,12 @@ public class ResturantRepositoryImpl implements ResturantRepository {
     return resturant;
     }
 
+    @Override
+    public Resturant save(Resturant resturant) {
+        resturant.setId(1234);
+        resturants.add(resturant);
+
+        return resturant;
+    }
+
 }

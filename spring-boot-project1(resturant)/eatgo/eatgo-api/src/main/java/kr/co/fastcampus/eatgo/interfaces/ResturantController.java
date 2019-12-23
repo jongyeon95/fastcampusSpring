@@ -6,10 +6,11 @@ import kr.co.fastcampus.eatgo.domain.MenuItemRepository;
 import kr.co.fastcampus.eatgo.domain.Resturant;
 import kr.co.fastcampus.eatgo.domain.ResturantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -30,5 +31,15 @@ public class ResturantController {
         Resturant resturant=resturantService.getResturant(id);
         return resturant;
 
+    }
+    @PostMapping("/resturants")
+    public ResponseEntity<?> create(@RequestBody Resturant resource) throws URISyntaxException {
+        String name = resource.getName();
+        String address=resource.getAddress();
+
+        Resturant resturant=new Resturant(1234L, name,address);
+        resturantService.addResturant(resturant);
+        URI location =new URI("/resturants/"+resturant.getId());
+        return ResponseEntity.created(location).body("{}");
     }
 }

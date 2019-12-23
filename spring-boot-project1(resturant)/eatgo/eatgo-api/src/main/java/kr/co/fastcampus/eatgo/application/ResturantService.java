@@ -5,7 +5,6 @@ import kr.co.fastcampus.eatgo.domain.MenuItemRepository;
 import kr.co.fastcampus.eatgo.domain.Resturant;
 import kr.co.fastcampus.eatgo.domain.ResturantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,5 +36,10 @@ public class ResturantService {
     public List<Resturant> getResturants() {
         List<Resturant> resturants= resturantRepository.findAll();
         return resturants;
+    }
+
+    public Resturant addResturant(Resturant resturant) {
+        Resturant saved=resturantRepository.save(resturant);
+        return saved;
     }
 }
