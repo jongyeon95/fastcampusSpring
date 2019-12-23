@@ -1,0 +1,1 @@
+test에서 controller에 원하는 객체 주입가능
