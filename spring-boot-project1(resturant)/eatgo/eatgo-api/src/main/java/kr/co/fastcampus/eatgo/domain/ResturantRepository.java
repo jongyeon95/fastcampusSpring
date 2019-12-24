@@ -1,11 +1,14 @@
 package kr.co.fastcampus.eatgo.domain;
 
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
 
-public interface ResturantRepository {
+import java.util.List;
+import java.util.Optional;
+
+public interface ResturantRepository extends CrudRepository<Resturant, Long> {
     List<Resturant> findAll();
 
-    Resturant findById(Long id);
+    Optional<Resturant> findById(Long id);
 
     Resturant save(Resturant resturant);
 }
