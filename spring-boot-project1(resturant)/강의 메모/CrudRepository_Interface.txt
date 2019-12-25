@@ -1,0 +1,4 @@
+CrudRepository<T,ID>
+특정 유형의 저장소에서 일반 CRUD 조작을위한 인터페이스입니다.
+
+https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html

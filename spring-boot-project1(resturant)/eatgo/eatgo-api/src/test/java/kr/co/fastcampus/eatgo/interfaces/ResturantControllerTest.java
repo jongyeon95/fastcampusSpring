@@ -19,8 +19,7 @@ import static org.hamcrest.core.StringContains.containsString;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
@@ -82,6 +81,16 @@ public class ResturantControllerTest {
                 .andExpect(header().string("location","/resturants/1234"))
                 .andExpect(content().string("{}"));
         verify(resturantService).addResturant(any());// 뭐든 제대로 들어오면 통과
+    }
+
+
+    @Test
+    public void update() throws Exception {
+        mvc.perform(patch("/resturants/1004")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"name\":\"Joker Bar\",\"address\":\"Seoul\"}"))
+                .andExpect(status().isOk());
+        verify(resturantService).updateResturant(1004L,"Joker Bar","Seoul");
     }
 
 

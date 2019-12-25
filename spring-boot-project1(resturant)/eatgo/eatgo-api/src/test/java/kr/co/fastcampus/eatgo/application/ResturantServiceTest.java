@@ -68,4 +68,14 @@ public class ResturantServiceTest {
         assertThat(created.getId(),is(1234L));
     }
 
+    @Test
+    public  void upadteResturant(){
+        Resturant resturant=new Resturant(1004L,"Bob zip","Seoul");
+        given(resturantRepository.findById(1004L)).willReturn(java.util.Optional.of(resturant));
+        resturantService.updateResturant(1004L,"Sool zip","Busan");
+        assertThat(resturant.getName(), is("Sool zip"));
+        assertThat(resturant.getAddress(),is("Busan"));
+    }
+
+
 }

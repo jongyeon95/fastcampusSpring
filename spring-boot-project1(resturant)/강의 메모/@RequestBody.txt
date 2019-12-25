@@ -1,0 +1,2 @@
+@RequestBody는 메서드의 인수 앞에 쓰인다.
+용도는 request의 body부분을 해당 객체에 바인딩한다.
