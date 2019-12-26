@@ -31,14 +31,19 @@ public class ResturantServiceTest {
 
     private void mockMenuItemRepository() {
         List<MenuItem> menuItems=new ArrayList<>();
-        MenuItem menuItem=new MenuItem("Kimchi");
-        menuItems.add(menuItem);
+        menuItems.add(MenuItem.builder()
+        .name("Kimchi")
+        .build());
         given(menuItemRepository.findAllByResturantId(1004L)).willReturn(menuItems);
     }
 
     private void mockResturantRepository() {
         List<Resturant> resturants =new ArrayList<>();
-        Resturant resturant = new Resturant(1004L, "Bob wip","Seoul");
+        Resturant resturant=Resturant.builder()
+                .id(1004L)
+                .address("Seoul")
+                .name("Bob zip")
+                .build();
         resturants.add(resturant);
         given(resturantRepository.findAll()).willReturn(resturants);
         given(resturantRepository.findById(1004L)).willReturn(java.util.Optional.of(resturant));
@@ -61,16 +66,27 @@ public class ResturantServiceTest {
 
     @Test
     public void addResturant(){
-        Resturant resturant= new Resturant("BeRyong","Busan");
-        Resturant saved= new Resturant(1234L,"BeRyong","Busan");
-        given(resturantRepository.save(any())).willReturn(saved);
+        given(resturantRepository.save(any())).will(invocation ->{
+            Resturant resturant=invocation.getArgument(0);
+            resturant.setId(1234L);
+            return resturant;
+        });
+        Resturant resturant=Resturant.builder()
+                .address("Busan")
+                .name("BeRyong")
+                .build();
+
         Resturant created = resturantService.addResturant(resturant);
         assertThat(created.getId(),is(1234L));
     }
 
     @Test
     public  void upadteResturant(){
-        Resturant resturant=new Resturant(1004L,"Bob zip","Seoul");
+        Resturant resturant=Resturant.builder()
+                .id(1004L)
+                .address("Seoul")
+                .name("Bob zip")
+                .build();
         given(resturantRepository.findById(1004L)).willReturn(java.util.Optional.of(resturant));
         resturantService.updateResturant(1004L,"Sool zip","Busan");
         assertThat(resturant.getName(), is("Sool zip"));

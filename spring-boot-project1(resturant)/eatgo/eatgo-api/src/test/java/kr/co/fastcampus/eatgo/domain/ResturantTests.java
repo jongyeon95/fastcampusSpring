@@ -8,7 +8,11 @@ import static org.hamcrest.core.Is.is;
 class ResturantTests {
     @Test
     public  void creation(){
-        Resturant resturant=new Resturant(1004L,"Bob zip","Seoul");
+        Resturant resturant=Resturant.builder()
+                .id(1004L)
+                .address("Seoul")
+                .name("Bob zip")
+                .build();
         assertThat(resturant.getName(),is("Bob zip"));
         assertThat(resturant.getId(),is(1004L));
         assertThat(resturant.getAddress(),is("Seoul"));
@@ -16,7 +20,11 @@ class ResturantTests {
 
     @Test
     public void information(){
-    Resturant resturant =new Resturant(1004L,"Bob zip", "Seoul");
+        Resturant resturant=Resturant.builder()
+                .id(1004L)
+                .address("Seoul")
+                .name("Bob zip")
+                .build();
     assertThat(resturant.getInformation(),is("Bob zip in Seoul"));
     }
 

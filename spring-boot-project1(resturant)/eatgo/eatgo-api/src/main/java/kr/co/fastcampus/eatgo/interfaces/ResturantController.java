@@ -38,7 +38,11 @@ public class ResturantController {
         String name = resource.getName();
         String address=resource.getAddress();
 
-        Resturant resturant=new Resturant(1234L, name,address);
+        Resturant resturant=Resturant.builder()
+                .id(1234L)
+                .address(name)
+                .name(address)
+                .build();
         resturantService.addResturant(resturant);
         URI location =new URI("/resturants/"+resturant.getId());
         return ResponseEntity.created(location).body("{}");

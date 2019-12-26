@@ -13,6 +13,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.core.StringContains.containsString;
@@ -38,7 +40,11 @@ public class ResturantControllerTest {
     @Test
     public void list() throws Exception {
         List<Resturant> resturants= new ArrayList<>();
-        resturants.add(new Resturant(1004L,"Bob zip","Seoul"));
+        resturants.add(Resturant.builder()
+                .id(1004L)
+                .address("Seoul")
+                .name("Bob zip")
+                .build());
         given(resturantService.getResturants()).willReturn(resturants);
         mvc.perform(get("/resturants"))
                 .andExpect(status().isOk())
@@ -49,10 +55,18 @@ public class ResturantControllerTest {
     }
     @Test
     public  void detail() throws Exception {
-       Resturant resturant1=new Resturant(1004L,"Bob zip","Seoul");
-        Resturant resturant2=new Resturant(2020L,"Cyber Food","Seoul");
+        Resturant resturant1=Resturant.builder()
+                .id(1004L)
+                .address("Seoul")
+                .name("Bob zip")
+                .build();
+        Resturant resturant2=Resturant.builder()
+                .id(2020L)
+                .address("Seoul")
+                .name("Cyber Food")
+                .build();
 
-        resturant1.addMenuItem(new MenuItem("Kimchi"));
+        resturant1.setMenuItems(Arrays.asList(MenuItem.builder().name("Kimchi").build()));
        given(resturantService.getResturant(1004L)).willReturn(resturant1);
         given(resturantService.getResturant(2020L)).willReturn(resturant2);
         mvc.perform(get("/resturants/1004"))
