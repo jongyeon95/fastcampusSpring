@@ -86,7 +86,15 @@ public class ResturantControllerTest {
     }
 
     @Test
-    public void create() throws Exception {
+    public void createWithValidData() throws Exception {
+        given(resturantService.addResturant(any())).will(invocation->{
+            Resturant resturant=invocation.getArgument(0);
+            return Resturant.builder()
+                    .id(1234L)
+                    .name(resturant.getName())
+                    .address(resturant.getAddress())
+                    .build();
+        });
 
         mvc.perform(post("/resturants")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -97,14 +105,39 @@ public class ResturantControllerTest {
         verify(resturantService).addResturant(any());// 뭐든 제대로 들어오면 통과
     }
 
+    @Test
+    public void createWithInvalidData() throws Exception {
+        mvc.perform(post("/resturants")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"name\":\"\",\"address\":\"\"}"))
+                .andExpect(status().isBadRequest());
+
+    }
+
+
 
     @Test
-    public void update() throws Exception {
+    public void updateWithVaildData() throws Exception {
         mvc.perform(patch("/resturants/1004")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"name\":\"Joker Bar\",\"address\":\"Seoul\"}"))
                 .andExpect(status().isOk());
         verify(resturantService).updateResturant(1004L,"Joker Bar","Seoul");
+    }
+
+    @Test
+    public void updateWithInvaildData() throws Exception {
+        mvc.perform(patch("/resturants/1004")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"name\":\"\",\"address\":\"\"}"))
+                .andExpect(status().isBadRequest());
+    }
+    @Test
+    public void updateWithoutName() throws Exception {
+        mvc.perform(patch("/resturants/1004")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"name\":\"\",\"address\":\"Busan\"}"))
+                .andExpect(status().isBadRequest());
     }
 
 
