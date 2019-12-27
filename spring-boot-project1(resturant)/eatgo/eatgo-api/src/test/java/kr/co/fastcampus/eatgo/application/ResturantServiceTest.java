@@ -57,11 +57,16 @@ public class ResturantServiceTest {
     }
 
     @Test
-    public void getResturant(){
+    public void getResturantWithExisted(){
         Resturant resturant = resturantService.getResturant(1004L);
         assertThat(resturant.getId(),is(1004L));
         MenuItem menuItem= resturant.getMenuItems().get(0);
         assertThat(menuItem.getName(),is("Kimchi"));
+    }
+
+    @Test(expected = ResturantNotFoundException.class)
+    public void getResturantWitNotExisted(){
+       resturantService.getResturant(404L);
     }
 
     @Test

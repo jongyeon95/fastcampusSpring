@@ -1,9 +1,6 @@
 package kr.co.fastcampus.eatgo.application;
 
-import kr.co.fastcampus.eatgo.domain.MenuItem;
-import kr.co.fastcampus.eatgo.domain.MenuItemRepository;
-import kr.co.fastcampus.eatgo.domain.Resturant;
-import kr.co.fastcampus.eatgo.domain.ResturantRepository;
+import kr.co.fastcampus.eatgo.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +23,7 @@ public class ResturantService {
     }
 
     public Resturant getResturant(Long id){
-        Resturant resturant=resturantRepository.findById(id).orElse(null);
+        Resturant resturant=resturantRepository.findById(id).orElseThrow(()->new ResturantNotFoundException(id));
 
         List<MenuItem> menuItems=menuItemRepository.findAllByResturantId(id);
         resturant.setMenuItems(menuItems);

@@ -54,7 +54,7 @@ public class ResturantControllerTest {
                         .string(containsString("\"name\":\"Bob zip\"")));
     }
     @Test
-    public  void detail() throws Exception {
+    public  void detailWithExisted() throws Exception {
         Resturant resturant1=Resturant.builder()
                 .id(1004L)
                 .address("Seoul")
@@ -83,6 +83,13 @@ public class ResturantControllerTest {
                         .string(containsString("\"id\":2020")))
                 .andExpect(content()
                         .string(containsString("\"name\":\"Cyber Food\"")));
+    }
+    @Test
+    public void detailWithNotExisted() throws  Exception{
+        given(resturantService.getResturant(404L)).willThrow(new ResturantNotFoundException(404L));
+        mvc.perform(get("/resturants/404"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("{}"));
     }
 
     @Test
