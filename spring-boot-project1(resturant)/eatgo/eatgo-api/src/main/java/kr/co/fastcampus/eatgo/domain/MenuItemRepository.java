@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface MenuItemRepository extends CrudRepository<MenuItem, Long> {
-    List<MenuItem> findAllByResturantId(Long resturantId);
+    List<MenuItem> findAllByRestaurantId(Long restaurantId);
 }
