@@ -53,34 +53,37 @@ public class RestaurantControllerTest {
     }
     @Test
     public  void detailWithExisted() throws Exception {
-        Restaurant restaurant1 = Restaurant.builder()
-                .id(1004L)
-                .address("Seoul")
-                .name("Bob zip")
-                .build();
-        Restaurant restaurant2 = Restaurant.builder()
-                .id(2020L)
-                .address("Seoul")
-                .name("Cyber Food")
-                .build();
+       Restaurant restaurant=Restaurant.builder()
+               .id(1004L)
+               .name("Bob House")
+               .address("Seoul")
+               .build();
 
-        restaurant1.setMenuItems(Arrays.asList(MenuItem.builder().name("Kimchi").build()));
-       given(restaurantService.getRestaurant(1004L)).willReturn(restaurant1);
-        given(restaurantService.getRestaurant(2020L)).willReturn(restaurant2);
+       MenuItem menuItem=MenuItem.builder()
+               .name("Kimchi")
+               .build();
+
+       restaurant.setMenuItems(Arrays.asList(menuItem));
+
+       Review review =Review.builder()
+               .name("JOKER")
+               .score(4)
+               .description("Great")
+               .build();
+
+       restaurant.setReviews(Arrays.asList(review));
+
+       given(restaurantService.getRestaurant(1004L)).willReturn(restaurant);
+
         mvc.perform(get("/restaurants/1004"))
                 .andExpect(status().isOk())
                 .andExpect(content()
                         .string(containsString("\"id\":1004")))
                 .andExpect(content()
-                        .string(containsString("\"name\":\"Bob zip\"")))
-                .andExpect(content().string(containsString("Kimchi")));
+                        .string(containsString("\"name\":\"Bob House\"")))
+                .andExpect(content().string(containsString("Kimchi")))
+                .andExpect(content().string(containsString("Great")));
 
-        mvc.perform(get("/restaurants/2020"))
-                .andExpect(status().isOk())
-                .andExpect(content()
-                        .string(containsString("\"id\":2020")))
-                .andExpect(content()
-                        .string(containsString("\"name\":\"Cyber Food\"")));
     }
     @Test
     public void detailWithNotExisted() throws  Exception{

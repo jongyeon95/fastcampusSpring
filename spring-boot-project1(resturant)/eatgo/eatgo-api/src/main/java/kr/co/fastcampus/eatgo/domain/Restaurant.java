@@ -23,33 +23,38 @@ public class Restaurant {
     @Id
     @GeneratedValue
     @Setter
-    private   Long id;
+    private Long id;
     @NotEmpty
-    private   String name;
+    private String name;
     @NotEmpty
-    private   String address;
+    private String address;
 
     @Transient
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<MenuItem> menuItems;
 
+    @Transient
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<Review> reviews;
+
 
     public String getInformation() {
-        return  name + " in "+address;
+        return name + " in " + address;
     }
-
-
 
 
     public void setMenuItems(List<MenuItem> menuItems) {
-        this.menuItems= new ArrayList<>(menuItems);
+        this.menuItems = new ArrayList<>(menuItems);
 
     }
 
 
-
     public void updateInformation(String name, String address) {
-        this.name=name;
-        this.address=address;
+        this.name = name;
+        this.address = address;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = new ArrayList<>(reviews);
     }
 }
