@@ -36,7 +36,7 @@ public class ReviewControllerTest {
                         .id(1004L)
                         .build()
         );
-        mvc.perform(post("/restaurant/1/reviews")
+        mvc.perform(post("/restaurants/1/reviews")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"name\":\"Joker\",\"score\":3,\"description\":\"Mat it da\"}"))
                 .andExpect(status().isCreated())
@@ -46,7 +46,7 @@ public class ReviewControllerTest {
 
     @Test
     public void createWithInvalidAttribute() throws Exception {
-        mvc.perform(post("/restaurant/1/reviews")
+        mvc.perform(post("/restaurants/1/reviews")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
         verify(reviewService, never()).addReview(eq(1L),any());
