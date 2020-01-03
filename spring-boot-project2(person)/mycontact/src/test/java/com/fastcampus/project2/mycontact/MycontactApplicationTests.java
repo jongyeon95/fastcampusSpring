@@ -1,10 +1,10 @@
-package com.fastcampus.javaproject.project3.demo;
+package com.fastcampus.project2.mycontact;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class MycontactApplicationTests {
 
 	@Test
 	void contextLoads() {
