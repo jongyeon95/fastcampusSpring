@@ -1,14 +1,18 @@
 package com.fastcampus.project2.mycontact.domain;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.time.LocalDate;
 
+@Setter
+@Getter
 @Entity
+@ToString
 public class Person {
     @Id
     @GeneratedValue
@@ -16,38 +20,22 @@ public class Person {
 
     private String name;
 
+
     private int age;
 
-    public Long getId() {
-        return id;
-    }
+    private String hobby;
 
-    public String getName() {
-        return name;
-    }
+    private String bloodType;
 
-    public int getAge() {
-        return age;
-    }
+    private String address;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private LocalDate birthday;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String job;
 
-    public void setAge(int age) {
-        this.age = age;
-    }
+    @ToString.Exclude
+    private String phoneNumber;
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                '}';
-    }
 }
+
+
