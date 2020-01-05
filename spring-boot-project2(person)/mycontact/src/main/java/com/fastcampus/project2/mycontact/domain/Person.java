@@ -2,17 +2,14 @@ package com.fastcampus.project2.mycontact.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @RequiredArgsConstructor
-@Data// Getter Setter RequiredArgsConstructor ToString EqualsAndHashCode를 포함
 public class Person {
     @Id
     @GeneratedValue
@@ -37,7 +34,9 @@ public class Person {
 
     @ToString.Exclude
     private String phoneNumber;
-    @OneToOne
+
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
+    @ToString.Exclude
     private Block block;
 
 
