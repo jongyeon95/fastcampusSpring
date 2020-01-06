@@ -53,7 +53,42 @@ class PersonRepositoryTest {
         map.put(person1,person1.getAge());
         System.out.println(map);
         System.out.println(map.get(person2));
+    }
 
+    @Test
+    void findByBloodType(){
+        givenPerson("martin",23,"A");
+        givenPerson("JongYeon",25,"B");
+        givenPerson("ace",17,"AB");
+        givenPerson("Loopi",16,"O");
+        givenPerson("nami",20,"A");
+
+        List<Person> result=personRepository.findByBloodType("A");
+       result.forEach(System.out::println);
+
+    }
+
+    @Test
+    void findByBirthdayBetween(){
+        givenPerson("martin",23,"A",LocalDate.of(1991,8,14));
+        givenPerson("JongYeon",25,"B",LocalDate.of(1995,7,7));
+        givenPerson("ace",17,"AB",LocalDate.of(1993,7,14));
+        givenPerson("Loopi",16,"O",LocalDate.of(1992,11,14));
+        givenPerson("nami",20,"A",LocalDate.of(1996,8,12));
+
+        List<Person> result=personRepository.findByBirthdayBetween(LocalDate.of(1990,1,1)
+                ,LocalDate.of(1995,12,31));
+        result.forEach(System.out::println);
+
+    }
+
+    private void givenPerson(String name, int age, String bloodType){
+       givenPerson(name,age,bloodType,null);
+    }
+    private void givenPerson(String name, int age, String bloodType,LocalDate birthday){
+        Person person=new Person(name, age, bloodType);
+        person.setBirthday(birthday);
+        personRepository.save(person);
     }
 
 }

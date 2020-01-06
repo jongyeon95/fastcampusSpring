@@ -26,11 +26,15 @@ class PersonServiceTest {
     @Test
     void getPeopleExcludeBlocks(){
         givenPeople();
-
-
         List<Person> result=personService.getPeopleExcludeBlocks();
-
         System.out.println(result);
+        result.forEach(System.out::println);
+    }
+
+    @Test
+    void getPeopleByName(){
+        givenPeople();
+        List<Person> result=personService.getPeopleByName("JongYeon");
         result.forEach(System.out::println);
     }
 
@@ -70,9 +74,6 @@ class PersonServiceTest {
         givenPerson("David",9,"B");
         givenBlockPerson("martin",29,"A");
         givenBlockPerson("mars",23,"O");
-
-
-
 
     }
 

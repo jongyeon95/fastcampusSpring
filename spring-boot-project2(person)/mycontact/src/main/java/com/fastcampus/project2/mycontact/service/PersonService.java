@@ -21,10 +21,7 @@ public class PersonService {
     @Autowired
     private BlockRepository blockRepository;
     public List<Person> getPeopleExcludeBlocks() {
-        List<Person> people = personRepository.findAll();
-      //  List<Block> blocks = blockRepository.findAll();
-       // List<String> blockNames=blocks.stream().map(Block::getName).collect(Collectors.toList());
-        return people.stream().filter(person -> person.getBlock()==null).collect(Collectors.toList());
+        return personRepository.findByBlockIsNull();
     }
 
     @Transactional(readOnly = true)
@@ -33,5 +30,10 @@ public class PersonService {
         System.out.println("Person: "+person);
         log.info("person: {}",person);
         return person;
+    }
+
+    public List<Person> getPeopleByName(String name) {
+
+        return personRepository.findByName(name);
     }
 }
