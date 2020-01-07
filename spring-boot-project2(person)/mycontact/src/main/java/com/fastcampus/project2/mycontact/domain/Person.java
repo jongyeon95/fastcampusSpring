@@ -1,13 +1,12 @@
 package com.fastcampus.project2.mycontact.domain;
 
-import com.fastcampus.project2.mycontact.dto.Birthday;
+import com.fastcampus.project2.mycontact.domain.dto.Birthday;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import java.time.LocalDate;
 
 @Entity
 @NoArgsConstructor

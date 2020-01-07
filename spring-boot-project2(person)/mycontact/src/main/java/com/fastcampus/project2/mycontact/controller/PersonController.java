@@ -1,5 +1,6 @@
 package com.fastcampus.project2.mycontact.controller;
 
+import com.fastcampus.project2.mycontact.controller.dto.PersonDto;
 import com.fastcampus.project2.mycontact.domain.Person;
 import com.fastcampus.project2.mycontact.repository.PersonRepository;
 import com.fastcampus.project2.mycontact.service.PersonService;
@@ -21,12 +22,20 @@ public class PersonController {
     public Person getPerson(@PathVariable Long id){
         return personService.getPerson(id);
     }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void postPerson(@RequestBody Person person){
         personService.put(person);
         log.info("person -> {}",personRepository.findAll());
 
+    }
+
+
+
+    @PutMapping("/{id}")
+    public void modifyPerson(@PathVariable Long id, @RequestBody PersonDto personDto){
+        personService.modify(id,personDto);
     }
 
 }

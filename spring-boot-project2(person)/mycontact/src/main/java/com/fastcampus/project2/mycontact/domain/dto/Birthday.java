@@ -1,4 +1,4 @@
-package com.fastcampus.project2.mycontact.dto;
+package com.fastcampus.project2.mycontact.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
