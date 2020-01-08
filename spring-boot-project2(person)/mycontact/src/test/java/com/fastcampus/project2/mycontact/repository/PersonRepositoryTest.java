@@ -21,32 +21,15 @@ class PersonRepositoryTest {
     void crud(){
        Person person=new Person();
        person.setName("Jong");
-       person.setAge(25);
-       person.setBloodType("B");
+
        personRepository.save(person);
         List<Person> result=personRepository.findByName("Jong");
         assertThat(result.size()).isEqualTo(1);
         assertThat(result.get(0).getName()).isEqualTo("Jong");
-        assertThat(result.get(0).getAge()).isEqualTo(25);
-        assertThat(result.get(0).getBloodType()).isEqualTo("B");
+//        assertThat(result.get(0).getAge()).isEqualTo(25);
     }
 
-    @Test
-    void constructorTest(){
-        Person person=new Person("JongYeon",25,"B");
 
-    }
-
-    @Test
-    void findByBloodType(){
-
-        List<Person> result=personRepository.findByBloodType("A");
-        assertThat(result.size()).isEqualTo(2);
-        assertThat(result.get(0).getName()).isEqualTo("martin");
-        assertThat(result.get(1).getName()).isEqualTo("minwoo");
-
-
-    }
 
     @Test
     void findByBirthdayBetween(){
