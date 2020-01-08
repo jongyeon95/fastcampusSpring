@@ -36,6 +36,13 @@ public class PersonController {
     @PutMapping("/{id}")
     public void modifyPerson(@PathVariable Long id, @RequestBody PersonDto personDto){
         personService.modify(id,personDto);
+        log.info("person -> {}",personRepository.findAll());
+    }
+
+    @PatchMapping("/{id}")//일부만 업데이트 한다.
+    public void modifyPerson(@PathVariable Long id, String name){
+        personService.modify(id,name);
+        log.info("person -> {}",personRepository.findAll());
     }
 
 }
