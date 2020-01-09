@@ -21,8 +21,7 @@ import org.springframework.web.util.NestedServletException;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -80,14 +79,14 @@ class PersonControllerTest {
 
         Person result= personRepository.findById(1L).get();
         log.info("HERE!!!!!!!!!!"+result.toString());
-
-        assertThat(result.getName()).isEqualTo("martin");
-        assertThat(result.getHobby()).isEqualTo("gaming");
-        assertThat(result.getJob()).isEqualTo("job seeker");
-        assertThat(result.getBirthday()).isEqualTo(Birthday.of(LocalDate.now()));
-        assertThat(result.getAddress()).isEqualTo("Seoul");
-        assertThat(result.getPhoneNumber()).isEqualTo("010-0000-0000");
-
+        assertAll(
+                ()->assertThat(result.getName()).isEqualTo("martin"),
+                ()-> assertThat(result.getHobby()).isEqualTo("gaming"),
+                ()-> assertThat(result.getJob()).isEqualTo("job seeker"),
+                ()->assertThat(result.getBirthday()).isEqualTo(Birthday.of(LocalDate.now())),
+                ()->assertThat(result.getAddress()).isEqualTo("Seoul"),
+                ()-> assertThat(result.getPhoneNumber()).isEqualTo("010-0000-0000")
+        );
     }
 
     @Test
