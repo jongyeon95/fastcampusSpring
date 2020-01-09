@@ -17,7 +17,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@RequiredArgsConstructor
 @Where(clause = "deleted=false")
 public class Person {
     @Id
@@ -54,9 +53,9 @@ public class Person {
             this.setAddress(personDto.getAddress());
         }
         if (!StringUtils.isEmpty(personDto.getJob())){
-            this.setAddress(personDto.getJob());
+            this.setJob(personDto.getJob());
         }
-        if(!StringUtils.isEmpty(getPhoneNumber())){
+        if(!StringUtils.isEmpty(personDto.getPhoneNumber())){
             this.setPhoneNumber(personDto.getPhoneNumber());
         }
         if(personDto.getBirthday()!=null){
