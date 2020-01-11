@@ -16,6 +16,7 @@ import java.time.LocalDate;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@RequiredArgsConstructor
 @Data
 @Where(clause = "deleted=false")
 public class Person {

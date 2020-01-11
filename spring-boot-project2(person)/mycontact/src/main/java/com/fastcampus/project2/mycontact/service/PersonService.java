@@ -20,11 +20,7 @@ public class PersonService {
 
     @Transactional(readOnly = true)
     public Person getPerson(Long id){
-//        Person person=personRepository.findById(id).get();
-       Person person = personRepository.findById(id).orElse(null);
-        log.info("person: {}",person);
-
-        return person;
+       return personRepository.findById(id).orElse(null);
     }
 
     public List<Person> getPeopleByName(String name) {
@@ -48,10 +44,8 @@ public class PersonService {
         if(!person.getName().equals(personDto.getName())){
             throw new RuntimeException("이름이 다릅니다.");
         }
-        log.info("Person 왜 이상한게 넘어오는데 ?- > "+personDto.toString());
         person.set(personDto);
         personRepository.save(person);
-        log.info("Person 이거냐 ?- > "+person.toString());
     }
 
 
