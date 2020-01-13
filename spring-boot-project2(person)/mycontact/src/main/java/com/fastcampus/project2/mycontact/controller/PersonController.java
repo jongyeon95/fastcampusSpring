@@ -2,11 +2,15 @@ package com.fastcampus.project2.mycontact.controller;
 
 import com.fastcampus.project2.mycontact.controller.dto.PersonDto;
 import com.fastcampus.project2.mycontact.domain.Person;
+import com.fastcampus.project2.mycontact.exception.PersonNotFoundException;
+import com.fastcampus.project2.mycontact.exception.RenameNotPermittedException;
+import com.fastcampus.project2.mycontact.exception.dto.ErrorResponse;
 import com.fastcampus.project2.mycontact.repository.PersonRepository;
 import com.fastcampus.project2.mycontact.service.PersonService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping(value = "/api/person")
@@ -34,17 +38,19 @@ public class PersonController {
 
     @PutMapping("/{id}")
     public void modifyPerson(@PathVariable Long id, @RequestBody PersonDto personDto){
-        personService.modify(id,personDto);
+
+            personService.modify(id,personDto);
     }
 
     @PatchMapping("/{id}")//일부만 업데이트 한다.
     public void modifyPerson(@PathVariable Long id, String name){
-        personService.modify(id,name);
+            personService.modify(id,name);
     }
     @DeleteMapping("/{id}")
     public void deletePerson(@PathVariable Long id){
         personService.delete(id);
 
     }
+
 
 }
