@@ -3,6 +3,8 @@ package com.fastcampus.project2.mycontact.service;
 import com.fastcampus.project2.mycontact.controller.dto.PersonDto;
 import com.fastcampus.project2.mycontact.domain.Person;
 import com.fastcampus.project2.mycontact.domain.dto.Birthday;
+import com.fastcampus.project2.mycontact.exception.PersonNotFoundException;
+import com.fastcampus.project2.mycontact.exception.RenameNotPermittedException;
 import com.fastcampus.project2.mycontact.repository.PersonRepository;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
@@ -73,13 +75,13 @@ class PersonServiceTest {
     void modifyIfPersonNotFound(){
         when(personRepository.findById(1L))
                 .thenReturn(Optional.empty());
-       assertThrows(RuntimeException.class,()-> personService.modify(1L,mockPersonDto()));
+       assertThrows(PersonNotFoundException.class,()-> personService.modify(1L,mockPersonDto()));
     }
     @Test
     void modifyIfNameIsDifferent(){
         when(personRepository.findById(1L))
                 .thenReturn(Optional.of(new Person("tony")));
-        assertThrows(RuntimeException.class,()->personService.modify(1L,mockPersonDto()));
+        assertThrows(RenameNotPermittedException.class,()->personService.modify(1L,mockPersonDto()));
 
     }
     @Test
@@ -94,7 +96,7 @@ class PersonServiceTest {
     void modifyByNameIfPersonNotFound(){
         when(personRepository.findById(1L))
                 .thenReturn(Optional.empty());
-        assertThrows(RuntimeException.class,()->personService.modify(1L,"daniel"));
+        assertThrows(PersonNotFoundException.class,()->personService.modify(1L,"daniel"));
     }
     @Test
     void modifyByName(){
@@ -108,7 +110,7 @@ class PersonServiceTest {
     void deleteIfPersonNotFound(){
         when(personRepository.findById(1L))
                 .thenReturn(Optional.empty());
-        assertThrows(RuntimeException.class,()->personService.delete(1L));
+        assertThrows(PersonNotFoundException.class,()->personService.delete(1L));
     }
 
     @Test
