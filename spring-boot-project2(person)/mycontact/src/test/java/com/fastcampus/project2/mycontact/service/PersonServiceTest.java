@@ -15,6 +15,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -119,6 +123,17 @@ class PersonServiceTest {
                 .thenReturn(Optional.of(new Person("martin")));
         personService.delete(1L);
         verify(personRepository,times(1)).save(argThat(new IsPersonWillBeDeleted()));
+    }
+
+    @Test
+    void getAll(){
+        when(personRepository.findAll(any(Pageable.class)))
+                .thenReturn(new PageImpl<>(Lists.newArrayList(new Person("martin"),new Person("dennis"),new Person("tony"))));
+        Page<Person> result=personService.getAll(PageRequest.of(0,3));
+        assertThat(result.getNumberOfElements()).isEqualTo(3);
+        assertThat(result.getContent().get(0).getName()).isEqualTo("martin");
+        assertThat(result.getContent().get(1).getName()).isEqualTo("dennis");
+        assertThat(result.getContent().get(2).getName()).isEqualTo("tony");
     }
 
     private static class IsPersonWillBeInserted implements ArgumentMatcher<Person>{
