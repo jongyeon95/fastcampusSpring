@@ -23,6 +23,7 @@ import java.util.List;
 @RestController
 @Slf4j
 public class PersonController {
+
     @Autowired
     private PersonService personService;
     @Autowired
