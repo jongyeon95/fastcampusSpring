@@ -1,16 +1,18 @@
 package com.example.study.repository;
 
-import com.example.study.StudyApplicationTests;
 import com.example.study.model.entity.User;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-public class UserRepositoryTest extends StudyApplicationTests {
-
+@SpringBootTest
+public class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
@@ -47,5 +49,27 @@ public class UserRepositoryTest extends StudyApplicationTests {
         });
 
     }
-    public void delete(){}
+    @Test
+    @Transactional // 실제로 동작하지 않음 예를 들어 삭제 안됨 Rollback 해줌
+    public void delete(){
+
+        Optional<User> user=userRepository.findById(1L);
+
+        Assert.assertTrue(user.isPresent());
+
+        user.ifPresent(selectUser ->{
+            userRepository.delete(selectUser);
+            System.out.println("Delete Success");
+        });
+
+        Optional<User> deleteUser=userRepository.findById(1L);
+
+        Assert.assertFalse(deleteUser.isPresent());
+
+
+
+
+
+    }
+
 }
