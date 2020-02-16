@@ -24,6 +24,7 @@ public class UserRepositoryTest {
         user.setPhoneNumber("010-3333-3");
         user.setCreatedAt(LocalDateTime.now());
         user.setCreatedBy("TestUser3");
+        System.out.println(user);
         User newUser=userRepository.save(user);
         System.out.println(newUser);
     }
