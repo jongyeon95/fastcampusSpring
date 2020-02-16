@@ -5,12 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "item")
 public class Item {
 
     @Id
@@ -22,4 +22,7 @@ public class Item {
     private Integer price;
 
     private String content;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "item")
+    private List<OrderDetail> orderDetailList;
 }

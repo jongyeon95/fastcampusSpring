@@ -19,8 +19,8 @@ public class OrderDetailRepositoryTest {
     public void create(){
         OrderDetail orderDetail=new OrderDetail();
         orderDetail.setOrderAt(LocalDateTime.now());
-        orderDetail.setUserId(9L);
-        orderDetail.setItemId(1L);
+   //     orderDetail.setUserId(9L);
+     //   orderDetail.setItemId(1L);
         OrderDetail newOderDetail=orderDetailRepository.save(orderDetail);
         Assert.assertNotNull(newOderDetail);
     }
