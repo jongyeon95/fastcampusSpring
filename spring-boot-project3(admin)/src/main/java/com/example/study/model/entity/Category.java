@@ -22,6 +22,8 @@ public class Category {
 
     private String type;
 
+    private String title;
+
     private LocalDateTime createdAt;
 
     private String createdBy;
