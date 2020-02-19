@@ -35,6 +35,8 @@ public class Partner {
 
     private String ceoName;
 
+    private Long categoryId;
+
     private LocalDateTime registeredAt;
 
     private LocalDateTime unregisteredAt;

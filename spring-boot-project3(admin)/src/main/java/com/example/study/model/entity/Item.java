@@ -28,6 +28,8 @@ public class Item {
 
     private Integer price;
 
+    private Long partnerId;
+
     private String brandName;
 
     private LocalDateTime registeredAt;
