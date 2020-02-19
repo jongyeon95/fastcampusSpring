@@ -35,4 +35,8 @@ public class OrderDetail {
 
     private String updatedBy;
 
+    private Long itemId;
+
+    private Long orderGroupId;
+
 }
