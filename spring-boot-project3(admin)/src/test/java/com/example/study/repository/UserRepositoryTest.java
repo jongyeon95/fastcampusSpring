@@ -18,14 +18,15 @@ public class UserRepositoryTest {
 
     @Test
     public void create(){
-        String account="Test01";
-        String password="Test01";
+        String account="Test04";
+        String password="Test03";
         String status="REGISTERED";
-        String email="Test01@gmail.com";
-        String phoneNumber="010-1111-1111";
+        String email="Test03@gmail.com";
+        String phoneNumber="010-1111-3333";
         LocalDateTime registeredAt=LocalDateTime.now();
-        LocalDateTime createdAt=LocalDateTime.now();
-        String createdBy="AdminServer";
+
+
+
 
         User user=new User();
         user.setAccount(account);
@@ -34,10 +35,10 @@ public class UserRepositoryTest {
         user.setEmail(email);
         user.setPhoneNumber(phoneNumber);
         user.setRegisteredAt(registeredAt);
-        user.setCreatedAt(createdAt);
-        user.setCreatedBy(createdBy);
 
-        User newUser=userRepository.save(user);
+        User u = User.builder().account(account).password(password).status(status).email(email).phoneNumber(phoneNumber).build();
+
+        User newUser=userRepository.save(u);
         Assert.assertNotNull(newUser);
 
     }
