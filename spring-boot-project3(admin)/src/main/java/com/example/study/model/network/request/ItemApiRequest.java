@@ -20,6 +20,8 @@ public class ItemApiRequest {
 
     private String name;
 
+    private String title;
+
     private String content;
 
     private BigDecimal price;
