@@ -22,10 +22,11 @@ public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemAp
 
     @Autowired
     private ItemRepository itemRepository;
+
     @Override
     public Header<ItemApiResponse> create(Header<ItemApiRequest> request) {
-        ItemApiRequest body=request.getData();
-        Item item= Item.builder()
+        ItemApiRequest body = request.getData();
+        Item item = Item.builder()
                 .status(body.getStatus())
                 .name(body.getName())
                 .title(body.getTitle())
@@ -36,7 +37,7 @@ public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemAp
                 .partner(partnerRepository.getOne(body.getPartnerId()))
                 .build();
 
-        Item newItem=itemRepository.save(item);
+        Item newItem = itemRepository.save(item);
 
 
         return response(newItem);
@@ -47,14 +48,14 @@ public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemAp
 
         return itemRepository.findById(id)
                 .map(item -> response(item))
-                .orElseGet(()->Header.ERROR("데이터 없음"));
+                .orElseGet(() -> Header.ERROR("데이터 없음"));
     }
 
     @Override
     public Header<ItemApiResponse> update(Header<ItemApiRequest> request) {
-        ItemApiRequest body=request.getData();
+        ItemApiRequest body = request.getData();
 
-         return itemRepository.findById(body.getId())
+        return itemRepository.findById(body.getId())
                 .map(item -> {
                     item.setStatus(body.getStatus())
                             .setName(body.getName())
@@ -66,19 +67,24 @@ public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemAp
                             .setUnregisteredAt(body.getUnregisteredAt());
                     return item;
                 })
-                 .map(newItem -> itemRepository.save(newItem))
-                 .map(i->response(i))
-                .orElseGet(()->Header.ERROR("데이터없음"));
+                .map(newItem -> itemRepository.save(newItem))
+                .map(i -> response(i))
+                .orElseGet(() -> Header.ERROR("데이터없음"));
 
 
     }
 
     @Override
     public Header delete(Long id) {
-        return null;
+
+        return itemRepository.findById(id).map(item -> {
+            itemRepository.delete(item);
+            return Header.OK();
+        }).orElseGet(() -> Header.ERROR("데이터 없음"));
+
     }
 
-    private Header<ItemApiResponse> response(Item item){
+    private Header<ItemApiResponse> response(Item item) {
         ItemApiResponse body = ItemApiResponse.builder()
                 .id(item.getId())
                 .status(item.getStatus())
