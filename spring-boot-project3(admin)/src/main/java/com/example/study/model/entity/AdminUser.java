@@ -1,5 +1,6 @@
 package com.example.study.model.entity;
 
+import com.example.study.model.enumClass.AdminStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,7 +32,8 @@ public class AdminUser {
 
     private String password;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private AdminStatus status;
 
     private String role;
 

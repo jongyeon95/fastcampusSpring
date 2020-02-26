@@ -1,6 +1,8 @@
 package com.example.study.model.entity;
 
 
+import com.example.study.model.enumClass.OrderPaymentType;
+import com.example.study.model.enumClass.OrderStatus;
 import com.example.study.model.enumClass.OrderType;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -29,7 +31,8 @@ public class OrderGroup {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 
     @Enumerated(EnumType.STRING)
     private OrderType orderType;
@@ -38,7 +41,8 @@ public class OrderGroup {
 
     private String revName;
 
-    private String paymentType;
+    @Enumerated(EnumType.STRING)
+    private OrderPaymentType paymentType;
 
     private BigDecimal totalPrice;
 
