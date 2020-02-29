@@ -1,6 +1,7 @@
 package com.example.study.repository;
 
 import com.example.study.model.entity.OrderDetail;
+import com.example.study.model.enumClass.OrderStatus;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class OrderDetailRepositoryTest {
     @Test
     public void create(){
         OrderDetail orderDetail=new OrderDetail();
-        orderDetail.setStatus("WAITING");
+        orderDetail.setStatus(OrderStatus.WAITING);
         orderDetail.setArrivalDate(LocalDateTime.now().plusDays(2));
         orderDetail.setQuantity(1);
         orderDetail.setTotalPrice(BigDecimal.valueOf(900000));
