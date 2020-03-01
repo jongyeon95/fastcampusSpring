@@ -14,10 +14,8 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
-public class UserApiLogicService implements CrudInterface<UserApiRequest, UserApiResponse> {
+public class UserApiLogicService extends BaseService<UserApiRequest, UserApiResponse,User> {
 
-    @Autowired
-    private UserRepository userRepository;
 
 
 
@@ -37,7 +35,7 @@ public class UserApiLogicService implements CrudInterface<UserApiRequest, UserAp
                 .registeredAt(LocalDateTime.now())
                 .build();
 
-        User newUser =userRepository.save(user);
+        User newUser =baseRepository.save(user);
         //3. 생성된 데이터 -> userApiResponse return
         return response(newUser);
     }
@@ -46,7 +44,7 @@ public class UserApiLogicService implements CrudInterface<UserApiRequest, UserAp
     public Header<UserApiResponse> read(Long id) {
 
         //id -> repository getOne , getbyID;
-        Optional<User> user=userRepository.findById(id);
+        Optional<User> user=baseRepository.findById(id);
 
         //user -> userApiResponse return
         return user
@@ -65,7 +63,7 @@ public class UserApiLogicService implements CrudInterface<UserApiRequest, UserAp
         UserApiRequest userApiRequest = request.getData();
 
         //2. id -> user 데이터를 찾고
-        Optional<User> optional = userRepository.findById(userApiRequest.getId());
+        Optional<User> optional = baseRepository.findById(userApiRequest.getId());
 
         return optional
                 .map(u -> {
@@ -82,7 +80,7 @@ public class UserApiLogicService implements CrudInterface<UserApiRequest, UserAp
                     //4. userApiResponse
 
                 })
-                .map(user -> userRepository.save(user))
+                .map(user -> baseRepository.save(user))
                 .map(upadteUser -> response(upadteUser))
                 .orElseGet(() -> Header.ERROR("데이터 없음"));
 
@@ -91,9 +89,9 @@ public class UserApiLogicService implements CrudInterface<UserApiRequest, UserAp
 
     @Override
     public Header delete(Long id) {
-        return userRepository.findById(id)
+        return baseRepository.findById(id)
                 .map(user -> {
-                    userRepository.delete(user);
+                    baseRepository.delete(user);
                     return Header.OK();
                 })
                 .orElseGet(()->Header.ERROR("데이터 없음"));
