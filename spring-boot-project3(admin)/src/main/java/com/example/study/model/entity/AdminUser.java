@@ -1,6 +1,6 @@
 package com.example.study.model.entity;
 
-import com.example.study.model.enumClass.AdminStatus;
+import com.example.study.model.enumclass.AdminStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

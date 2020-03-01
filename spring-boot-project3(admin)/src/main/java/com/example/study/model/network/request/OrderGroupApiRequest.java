@@ -1,8 +1,8 @@
 package com.example.study.model.network.request;
 
-import com.example.study.model.enumClass.OrderPaymentType;
-import com.example.study.model.enumClass.OrderStatus;
-import com.example.study.model.enumClass.OrderType;
+import com.example.study.model.enumclass.OrderPaymentType;
+import com.example.study.model.enumclass.OrderStatus;
+import com.example.study.model.enumclass.OrderType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

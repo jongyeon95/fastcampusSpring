@@ -1,9 +1,9 @@
 package com.example.study.model.entity;
 
 
-import com.example.study.model.enumClass.OrderPaymentType;
-import com.example.study.model.enumClass.OrderStatus;
-import com.example.study.model.enumClass.OrderType;
+import com.example.study.model.enumclass.OrderPaymentType;
+import com.example.study.model.enumclass.OrderStatus;
+import com.example.study.model.enumclass.OrderType;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedBy;

@@ -1,9 +1,7 @@
-package com.example.study.model.enumClass;
+package com.example.study.model.enumclass;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import javax.persistence.Enumerated;
 
 @Getter
 @AllArgsConstructor

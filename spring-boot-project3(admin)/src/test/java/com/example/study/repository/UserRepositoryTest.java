@@ -1,11 +1,10 @@
 package com.example.study.repository;
 
 import com.example.study.model.entity.User;
-import com.example.study.model.enumClass.UserStatus;
+import com.example.study.model.enumclass.UserStatus;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 

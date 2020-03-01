@@ -1,6 +1,6 @@
 package com.example.study.model.entity;
 
-import com.example.study.model.enumClass.ItemStatus;
+import com.example.study.model.enumclass.ItemStatus;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedBy;

@@ -1,4 +1,4 @@
-package com.example.study.model.enumClass;
+package com.example.study.model.enumclass;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +7,8 @@ import lombok.Getter;
 @Getter
 public enum OrderStatus {
     COMPLETE(0,"완료","주문 처리 완료"),
-    WAITING(1,"대기","주문 완료 대기중");
+    ORDERING(1,"주문중","주문중"),
+    CONFIRM(2,"확인","주민 확인 완료");
 
     private Integer id;
     private String title;

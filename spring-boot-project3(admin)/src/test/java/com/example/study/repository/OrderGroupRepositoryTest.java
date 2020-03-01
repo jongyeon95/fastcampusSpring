@@ -2,17 +2,15 @@ package com.example.study.repository;
 
 import com.example.study.StudyApplicationTests;
 import com.example.study.model.entity.OrderGroup;
-import com.example.study.model.enumClass.OrderPaymentType;
-import com.example.study.model.enumClass.OrderStatus;
-import com.example.study.model.enumClass.OrderType;
+import com.example.study.model.enumclass.OrderPaymentType;
+import com.example.study.model.enumclass.OrderStatus;
+import com.example.study.model.enumclass.OrderType;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
-import static org.junit.Assert.*;
 
 public class OrderGroupRepositoryTest extends StudyApplicationTests {
 

@@ -1,6 +1,6 @@
 package com.example.study.model.network.request;
 
-import com.example.study.model.enumClass.ItemStatus;
+import com.example.study.model.enumclass.ItemStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

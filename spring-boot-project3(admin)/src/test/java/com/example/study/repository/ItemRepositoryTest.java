@@ -2,7 +2,7 @@ package com.example.study.repository;
 
 
 import com.example.study.model.entity.Item;
-import com.example.study.model.enumClass.ItemStatus;
+import com.example.study.model.enumclass.ItemStatus;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

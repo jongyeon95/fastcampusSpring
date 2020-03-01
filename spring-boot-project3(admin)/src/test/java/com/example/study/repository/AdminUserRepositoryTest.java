@@ -2,14 +2,10 @@ package com.example.study.repository;
 
 import com.example.study.StudyApplicationTests;
 import com.example.study.model.entity.AdminUser;
-import com.example.study.model.enumClass.AdminStatus;
+import com.example.study.model.enumclass.AdminStatus;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.time.LocalDateTime;
-
-import static org.junit.Assert.*;
 
 public class AdminUserRepositoryTest extends StudyApplicationTests {
 
