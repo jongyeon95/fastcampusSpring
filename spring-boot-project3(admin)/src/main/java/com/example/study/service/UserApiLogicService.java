@@ -1,10 +1,17 @@
 package com.example.study.service;
 
+import com.example.study.model.entity.OrderGroup;
 import com.example.study.model.entity.User;
 import com.example.study.model.enumclass.UserStatus;
 import com.example.study.model.network.Header;
 import com.example.study.model.network.request.UserApiRequest;
+import com.example.study.model.network.response.ItemApiResponse;
+import com.example.study.model.network.response.OrderGroupApiResponse;
 import com.example.study.model.network.response.UserApiResponse;
+import com.example.study.model.network.response.UserOrderInfoApiResponse;
+import com.example.study.repository.UserRepository;
+import org.hibernate.criterion.Order;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,19 +23,24 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
-public class UserApiLogicService extends BaseService<UserApiRequest, UserApiResponse,User> {
+public class UserApiLogicService extends BaseService<UserApiRequest, UserApiResponse, User> {
 
 
+    @Autowired
+    private OrderGroupApiLogicService orderGroupApiLogicService;
 
+    @Autowired
+    private ItemApiLogicService itemApiLogicService;
 
     @Override
+
     public Header<UserApiResponse> create(Header<UserApiRequest> request) {
 
         //1 request data
-        UserApiRequest userApiRequest=request.getData();
+        UserApiRequest userApiRequest = request.getData();
 
         //2 create User
-        User user= User.builder()
+        User user = User.builder()
                 .account(userApiRequest.getAccount())
                 .password(userApiRequest.getPassword())
                 .status(UserStatus.REGISTERED)
@@ -37,7 +49,7 @@ public class UserApiLogicService extends BaseService<UserApiRequest, UserApiResp
                 .registeredAt(LocalDateTime.now())
                 .build();
 
-        User newUser =baseRepository.save(user);
+        User newUser = baseRepository.save(user);
         //3. 생성된 데이터 -> userApiResponse return
         return Header.OK(response(newUser));
     }
@@ -46,16 +58,16 @@ public class UserApiLogicService extends BaseService<UserApiRequest, UserApiResp
     public Header<UserApiResponse> read(Long id) {
 
         //id -> repository getOne , getbyID;
-        Optional<User> user=baseRepository.findById(id);
+        Optional<User> user = baseRepository.findById(id);
 
         //user -> userApiResponse return
         return user
-                .map(u-> Header.OK(response(u)))
+                .map(u -> Header.OK(response(u)))
                 .orElseGet(
-                        ()->Header.ERROR("데이터없음")
+                        () -> Header.ERROR("데이터없음")
                 );
 
-        }
+    }
 
 
     @Override
@@ -97,14 +109,14 @@ public class UserApiLogicService extends BaseService<UserApiRequest, UserApiResp
                     baseRepository.delete(user);
                     return Header.OK();
                 })
-                .orElseGet(()->Header.ERROR("데이터 없음"));
+                .orElseGet(() -> Header.ERROR("데이터 없음"));
 
 
     }
 
-    private UserApiResponse response(User user){
+    private UserApiResponse response(User user) {
         // user - > userApiResponse
-        UserApiResponse userApiResponse=UserApiResponse.builder()
+        UserApiResponse userApiResponse = UserApiResponse.builder()
                 .id(user.getId())
                 .account(user.getAccount())
                 .password(user.getPassword()) //todo 암호화
@@ -121,13 +133,39 @@ public class UserApiLogicService extends BaseService<UserApiRequest, UserApiResp
     }
 
     public Header<List<UserApiResponse>> search(Pageable pageable) {
-        Page<User> users= baseRepository.findAll(pageable);
+        Page<User> users = baseRepository.findAll(pageable);
 
-        List<UserApiResponse> userApiResponseList=users.stream()
+        List<UserApiResponse> userApiResponseList = users.stream()
                 .map(user -> response(user))
                 .collect(Collectors.toList());
         //List<UserApiResponse>
         return Header.OK(userApiResponseList);
+
+    }
+
+    public Header<UserOrderInfoApiResponse> orderInfo(Long id) {
+        User user = baseRepository.getOne(id);
+        UserApiResponse userApiResponse = response(user);
+
+
+        List<OrderGroup> orderGroupList = user.getOrderGroupList();
+        List<OrderGroupApiResponse> orderGroupApiResponseList = orderGroupList.stream()
+                .map(orderGroup -> {
+                    OrderGroupApiResponse orderGroupApiResponse = orderGroupApiLogicService.response(orderGroup).getData();
+                    List<ItemApiResponse> itemApiResponseList =orderGroup.getOrderDetailList().stream()
+                            .map(detail->detail.getItem())
+                            .map(item -> itemApiLogicService.response(item).getData())
+                            .collect(Collectors.toList());
+                    orderGroupApiResponse.setItemApiResponseList(itemApiResponseList);
+                    return orderGroupApiResponse;
+                })
+                .collect(Collectors.toList());
+        userApiResponse.setOrderGroupApiResponseList(orderGroupApiResponseList);
+        UserOrderInfoApiResponse userOrderInfoApiResponse=UserOrderInfoApiResponse.builder()
+                .userApiResponse(userApiResponse)
+                .build();
+
+        return Header.OK(userOrderInfoApiResponse);
 
     }
 }

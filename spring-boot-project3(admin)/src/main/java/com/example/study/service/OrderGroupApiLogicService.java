@@ -86,7 +86,7 @@ public class OrderGroupApiLogicService extends BaseService<OrderGroupApiRequest,
 
     }
 
-    private Header<OrderGroupApiResponse> response(OrderGroup orderGroup){
+    public Header<OrderGroupApiResponse> response(OrderGroup orderGroup){
 
 
         OrderGroupApiResponse orderGroupApiResponse=OrderGroupApiResponse.builder()
