@@ -16,15 +16,11 @@ public class PageController {
 
     @RequestMapping(path = {""},method = RequestMethod.GET)
     public ModelAndView index() {
-        ModelAndView mv=new ModelAndView();
-        mv.setViewName("/pages/main");
-        mv.addObject("menuList", adminMenuService.getAdminMenu());
-        mv.addObject("code", "main");
-//        return new ModelAndView("/pages/main")
-//                .addObject("menuList", adminMenuService.getAdminMenu())
-//                .addObject("code", "main")
-//                ;
-        return mv;
+        return new ModelAndView("/pages/main")
+                .addObject("menuList", adminMenuService.getAdminMenu())
+                .addObject("code", "main")
+                ;
+
     }
 
     @RequestMapping("/user")
