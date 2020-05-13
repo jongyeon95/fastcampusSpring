@@ -53,7 +53,7 @@ public class PersonService {
     }
 
 
-    @Transactional
+    @Transactional//처리한 쿼리를 자동 rollback 해주기 위해 사용된다.
     public void modify(Long id, String name) {
 
         Person person=personRepository.findById(id).orElseThrow(PersonNotFoundException::new);

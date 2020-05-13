@@ -18,6 +18,7 @@ public class HelloWorldController {
         throw new RuntimeException("Hello RuntimeException");
     }
 
+    //오류핸들러
     @ExceptionHandler(value = RuntimeException.class)
     public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException ex){
         return new ResponseEntity<>(ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR,"알 수 없는 서버 오류가 발생하였습니다.")

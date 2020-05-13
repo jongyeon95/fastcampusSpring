@@ -40,7 +40,7 @@ public class PersonController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.CREATED)//응답 상태코드
     public void postPerson(@RequestBody @Valid PersonDto personDto){
 
         personService.put(personDto);
